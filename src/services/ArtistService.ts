@@ -1,26 +1,25 @@
 import axios from 'axios'
-import { getToken } from '@/utils/Cookies'
-import { Artist } from '@/models/Artist'
+import {getToken} from '@/utils/Cookies'
+import {Artist} from '@/models/Artist'
 
 export function findArtists(
-  artistName: string
+    artistName: string
 ): Promise<ReadonlyArray<Artist>> {
-  const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-    artistName
-  )}&type=artist`
+    const searchUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(
+        artistName
+    )}&type=artist`
 
-  return (
-    axios
-      .get(searchUrl, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-          'Content-Type': 'application/json',
-        },
-      })
-      //TODO any
-      .then((res: any) => res.data.artists.items)
-      .catch((error) => {
-        console.error(error)
-      })
-  )
+    return (
+        axios
+            .get(searchUrl, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((res) => res.data.artists.items)
+            .catch((error) => {
+                console.error(error)
+            })
+    )
 }

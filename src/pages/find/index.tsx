@@ -20,7 +20,7 @@ export default function Find() {
 
   const router = useRouter()
 
-  async function searchAlbums(e) {
+  async function searchAlbums(e: { preventDefault: () => void }) {
     e.preventDefault()
     setWarning(undefined)
     if (!search) return
